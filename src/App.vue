@@ -3,12 +3,22 @@
     <router-link to="/">Events</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
-  <Suspense>
-    <template #default>
-      <router-view />
+  <router-view v-slot="{ Component }">
+    <template v-if="Component">
+      <Transition mode="out-in">
+        <KeepAlive>
+          <Suspense>
+            <div>
+              <!-- main content -->
+              <component :is="Component"></component>
+            </div>
+            <!-- loading state -->
+            <template #fallback> Loading... </template>
+          </Suspense>
+        </KeepAlive>
+      </Transition>
     </template>
-    <template #fallback> Loading... </template>
-  </Suspense>
+  </router-view>
 </template>
 
 <style>
