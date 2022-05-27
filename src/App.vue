@@ -3,7 +3,12 @@
     <router-link to="/">Events</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
-  <router-view />
+  <Suspense>
+    <template #default>
+      <router-view />
+    </template>
+    <template #fallback> Loading... </template>
+  </Suspense>
 </template>
 
 <style>
