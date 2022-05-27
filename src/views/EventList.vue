@@ -1,13 +1,9 @@
 <script lang="ts" setup>
 import EventCard from "@/components/EventCard.vue"; // @ is an alias to /src
+import { getEvents } from "@/services/EventService";
 import { Event } from "@/types/Event";
-import axios from "axios";
 
-const events: Event[] = (
-  await axios.get<Event[]>(
-    "https://my-json-server.typicode.com/markphilipp/real-world-vue/events"
-  )
-).data;
+const events: Event[] = await getEvents();
 </script>
 
 <template>
